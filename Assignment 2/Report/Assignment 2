@@ -1,0 +1,66 @@
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+\begin{document}
+
+\title{3D Object Generation (3DGAN) \\
+{\footnotesize Homework 2 of Artificial Neural Network}
+}
+
+\author{ Rohit Das\\
+\textit{Student ID - 61047086s}\\
+\IEEEauthorblockA{\textit{Computer Science and Engineering} \\
+\textit{National Taiwan Normal University}\\
+Taipei City, Taiwan \\
+rdas.879@gmail.com}
+}
+
+\maketitle
+
+\begin{abstract}
+This report provides a detailed information of modeling volumetric objects in 
+General Adversarial Network.
+\end{abstract}
+
+\begin{IEEEkeywords}
+Artificial Neural Network, GAN, 3DGAN
+\end{IEEEkeywords}
+
+\section{Introduction}
+This is the report of second homework of Artificial Neural Network course in National Taiwan Normal University. The main goal of this project is predicting the latent space of object shapes using 3DGAN.
+
+\section{Methods}
+Generative Adversarial Networks(GAN) consists of a generator and a discriminator, where the discriminator tries to classify real objects and objects synthesized by the generator and the generator attempts to confuse discriminator. In 3D-Generative Adversarial Network the generator maps a 200-dimensional latent vector randomly samples from a probabilistic latent space, to a 64 x 64 x 64 cube, representing an object in 3D voxel space. The discriminator outputs a confidence value whether a 3D object input is real or synthetic.
+
+\section{Experiment}
+The generator consists of five volumetric fully convolutional layers of kernel sizes 4 x 4 x 4 and strides 2, with batch normalization and ReLU layers added in between and a Sigmoid layer at the end. The discriminator basically mirrors the generator, except that it uses Leaky ReLU instead of ReLU layers. There are no pooling or linear layers in the network. For optimization ADAM is used.
+
+\section{Results}
+The results generated from the model shows that after 200 epochs, the loss has started to decrease to 0. The model generated Epoch loss of Descriptor D(x) as 0.1557 and Generator as 0.4103. After testing, the Binary Cross Entropy Loss comes close to 0.41(approx) as the highest value after training for 500 epochs which took about 4 hours.
+\begin{figure}[htbp]
+\includegraphics[width = 9cm]{Test Data.png}
+\caption{Test Results}
+\label{fig1}
+\end{figure}
+
+\section{Conclusion}
+Generative Adversarial Neural Network is fun to work with except the implementation part. The most difficult part I found is implementing the layers for the neural network. Although the end result was satisfactory for 500 epochs. This is only one part of the paper I implemented. The main part of the paper was 3D VAEGAN but unfortunately i couldn't been able to comprehend it.Also the dataset contains the voxel data of chairs. If I change the activation function from Sigmoid to Tanh, and more training epochs perhaps better result can beobtained.  I thank professor Yeh for giving me the opportunity to work on this project. 
+\section{References}
+Some website references:
+\begin{enumerate}
+  \item \href{http://3dgan.csail.mit.edu/}{Learning a Probabilistic Latent Space of Object Shapes
+via 3D Generative-Adversarial Modeling}
+  \item \href{https://github.com/rimchang/3DGAN-Pytorch}{A similar approach in Github}
+  \item \href{https://en.wikipedia.org/wiki/Generative_adversarial_network}{Wikipedia}
+\end{enumerate}
+
+\end{document}
